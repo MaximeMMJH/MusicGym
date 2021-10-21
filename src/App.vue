@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <router-view />
+    <v-col class="mt-14"></v-col>
     <NavigationBar />
   </v-app>
 </template>

@@ -20,7 +20,7 @@
       return {
         navItems: [
           { title: 'Home', route: { name: 'home' }, icon: 'mdi-home' },
-          { title: 'Create solution', route: { name: 'create' }, icon: 'mdi-plus-circle' },
+          { title: 'Create solution', route: { name: 'create-options' }, icon: 'mdi-plus-circle' },
           { title: 'Search', route: { name: 'search' }, icon: 'mdi-magnify' },
           { title: 'Profile', route: { name: 'profile', params: { author:'Jan Janssen'} }, icon: 'mdi-account-circle'}
         ]

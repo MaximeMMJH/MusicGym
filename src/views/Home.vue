@@ -1,11 +1,28 @@
 <template>
-  <v-content>
-    <v-container mt-8>
-      <v-card elevation-12>
-        home
-      </v-card>
-    </v-container>
-  </v-content>
+  <v-container mt-8>
+    <h1>Your routines</h1>
+    <RoutineCard
+      v-for="routine in routine.items"
+      :key="routine.id"
+      :routine="routine"
+    />
+  </v-container>
 </template>
 
-<script></script>
+<script>
+import RoutineCard from "@/components/RoutineCard.vue";
+import { mapActions, mapState } from "vuex";
+
+export default {
+  components: { RoutineCard },
+  created() {
+    this.fetchRoutines();
+  },
+  computed: {
+    ...mapState(["routine"]),
+  },
+  methods: {
+    ...mapActions("routine", ["fetchRoutines"]),
+  },
+};
+</script>
