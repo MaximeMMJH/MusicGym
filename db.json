@@ -1,0 +1,44 @@
+{
+  "exercises": [
+    {
+      "id": "35a8749c-d0f0-435b-81cc-5c27876bce6f",
+      "title": "test 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "exerciseType": "IntervalRecognition",
+      "intervalRecognitionExerciseProperties": {},
+      "playAlongExerciseProperties": {}
+    },
+    {
+      "id": "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
+      "title": "test 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "exerciseType": "IntervalRecognition",
+      "intervalRecognitionExerciseProperties": {},
+      "playAlongExerciseProperties": {}
+    },
+    {
+      "id": "169dd088-583e-4275-83d3-b9df91e4e1c9",
+      "title": "test 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "exerciseType": "IntervalRecognition",
+      "intervalRecognitionExerciseProperties": {},
+      "playAlongExerciseProperties": {}
+    },
+    {
+      "id": "802b9926-f292-483b-953c-5fdd2086b320",
+      "title": "test 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "exerciseType": "IntervalRecognition",
+      "intervalRecognitionExerciseProperties": {},
+      "playAlongExerciseProperties": {}
+    },
+    {
+      "id": "77902ecd-4707-43ff-a107-454906b8d814",
+      "title": "test 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "exerciseType": "IntervalRecognition",
+      "intervalRecognitionExerciseProperties": {},
+      "playAlongExerciseProperties": {}
+    }
+  ]
+}
