@@ -9,7 +9,7 @@
       </v-card-title>
 
       <v-card-subtitle class="text-left">
-        tried {{ routine.timesCompleted }} times
+        Completed {{ routine.timesCompleted }} times
       </v-card-subtitle>
 
       <v-card-text class="text-left">{{ routine.description }}</v-card-text>

@@ -1,13 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
 import ProfileEdit from "../views/ProfileEdit.vue";
 import Register from "@/views/Register.vue";
 import RoutineShow from "@/views/RoutineShow.vue";
 import CreateOptions from "@/views/CreateOptions.vue";
 import Search from "@/views/Search.vue";
+import ExerciseCreate from "@/views/ExerciseCreate.vue";
+import RoutineCreate from "@/views/RoutineCreate.vue";
 
 Vue.use(VueRouter);
 
@@ -16,11 +17,6 @@ const routes = [
     path: "/",
     name: "home",
     component: Home,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: Login,
   },
   {
     path: "/register",
@@ -52,6 +48,16 @@ const routes = [
     path: "/search",
     name: "search",
     component: Search,
+  },
+  {
+    path: "/exercise/create",
+    name: "exercise-create",
+    component: ExerciseCreate,
+  },
+  {
+    path: "/routine/create",
+    name: "routine-create",
+    component: RoutineCreate,
   },
 ];
 

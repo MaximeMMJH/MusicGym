@@ -13,4 +13,7 @@ export default {
   getRoutines() {
     return apiClient.get("/routines");
   },
+  getRoutine(id) {
+    return apiClient.get("/routines/" + id);
+  },
 };
