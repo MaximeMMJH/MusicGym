@@ -19,6 +19,16 @@ const routes = [
     component: Home,
   },
   {
+    path: "/exercise/create",
+    name: "exercise-create",
+    component: ExerciseCreate,
+  },
+  {
+    path: "/routine/create",
+    name: "routine-create",
+    component: RoutineCreate,
+  },
+  {
     path: "/register",
     name: "register",
     component: Register,
@@ -48,16 +58,6 @@ const routes = [
     path: "/search",
     name: "search",
     component: Search,
-  },
-  {
-    path: "/exercise/create",
-    name: "exercise-create",
-    component: ExerciseCreate,
-  },
-  {
-    path: "/routine/create",
-    name: "routine-create",
-    component: RoutineCreate,
   },
 ];
 

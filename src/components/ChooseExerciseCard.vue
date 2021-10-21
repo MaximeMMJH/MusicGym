@@ -1,7 +1,7 @@
 <template>
-  <v-card elevation="2">
-    <h3>exercise :)</h3>
-  </v-card>
+  <v-container class="px-0">
+    <v-card>hey</v-card>
+  </v-container>
 </template>
 
 <script>
