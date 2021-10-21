@@ -94,5 +94,3 @@ export default {
   computed: mapState(["user"]),
 };
 </script>
-
-<style></style>
