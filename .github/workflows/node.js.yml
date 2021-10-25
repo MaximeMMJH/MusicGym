@@ -32,7 +32,7 @@ jobs:
     - name: build a package
       run: npm run build --if-present
     
-    - name: run tests
-      run: npm test # how do i specify tests?
+    #- name: run tests
+    #  run: npm test # how do i specify tests?
     
     
