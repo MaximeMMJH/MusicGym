@@ -21,8 +21,8 @@
 
         <v-row justify="center">
           <v-col cols="10">
-            <ChooseExerciseCard
-              v-for="exercise in this.chosenExercises"
+            <ChosenExerciseCard
+              v-for="exercise in this.selectedExercises"
               :key="exercise.id"
               :exercise="exercise"
             />
@@ -30,7 +30,7 @@
         </v-row>
 
         <v-row justify="center">
-          <choose-exercise-dialog />
+          <choose-exercise-dialog @selectedExercise="addSelectedExercise" />
         </v-row>
 
         <v-row>
@@ -42,13 +42,13 @@
 </template>
 
 <script>
-import ChooseExerciseCard from "@/components/ChooseExerciseCard.vue";
-import ChooseExerciseDialog from '../components/ChooseExerciseDialog.vue';
+import ChooseExerciseDialog from "../components/ChooseExerciseDialog.vue";
+import ChosenExerciseCard from "@/components/ChosenExerciseCard.vue";
 
 export default {
   data() {
     return {
-      chosenExercises: [],
+      selectedExercises: [],
       routine: this.createFreshRoutineObject(),
     };
   },
@@ -62,21 +62,13 @@ export default {
         ExerciseIds: [],
       };
     },
-    addCard() {
-      this.chosenExercises.push({
-        id: "77902ecd-4707-43ff-a107-454906b8d814",
-        title: "test 1",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        exerciseType: "IntervalRecognition",
-        intervalRecognitionExerciseProperties: {},
-        playAlongExerciseProperties: {},
-      });
+    addSelectedExercise(value) {
+      this.selectedExercises.push(value);
     },
   },
   components: {
-    ChooseExerciseCard,
     ChooseExerciseDialog,
+    ChosenExerciseCard,
   },
 };
 </script>
