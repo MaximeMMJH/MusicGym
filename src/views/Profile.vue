@@ -64,11 +64,6 @@
     </v-row>
     <v-row align="center" justify="center">
       <v-col cols="12">
-        <h1>Routines</h1>
-      </v-col>
-    </v-row>
-    <v-row align="center" justify="center">
-      <v-col cols="12">
         <h1>Your exercises</h1>
       </v-col>
     </v-row>

@@ -2,14 +2,18 @@
   <v-container fill-height fluid>
     <v-row justify="center" align="center">
       <v-col>
-        <h1>New routine</h1>
-        <v-row justify="center">
+        <h1>New routine: {{ routine.title }}</h1>
+        <v-row justify="center" class="mt-2">
           <v-col cols="10">
             <v-card>
               <v-card-title class="justify-center"> </v-card-title>
               <v-card-text>
-                <v-text-field label="Title"></v-text-field>
-                <v-textarea label="Description"></v-textarea>
+                <v-text-field
+                  v-model="routine.title"
+                  outlined
+                  label="Title"
+                ></v-text-field>
+                <v-textarea outlined label="Description"></v-textarea>
               </v-card-text>
             </v-card>
           </v-col>
@@ -19,15 +23,18 @@
           <v-col cols="10">
             <ChooseExerciseCard
               v-for="exercise in this.chosenExercises"
-              :key="exercise"
+              :key="exercise.id"
+              :exercise="exercise"
             />
           </v-col>
         </v-row>
 
         <v-row justify="center">
-          <v-card v-on:click="addCard" class="rounded-circle" width="100">
-            <v-icon size="100">mdi-plus-circle</v-icon>
-          </v-card>
+          <choose-exercise-dialog />
+        </v-row>
+
+        <v-row>
+          <v-col> </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -36,6 +43,7 @@
 
 <script>
 import ChooseExerciseCard from "@/components/ChooseExerciseCard.vue";
+import ChooseExerciseDialog from '../components/ChooseExerciseDialog.vue';
 
 export default {
   data() {
@@ -55,11 +63,20 @@ export default {
       };
     },
     addCard() {
-      this.chosenExercises.push(this.routine.title);
+      this.chosenExercises.push({
+        id: "77902ecd-4707-43ff-a107-454906b8d814",
+        title: "test 1",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        exerciseType: "IntervalRecognition",
+        intervalRecognitionExerciseProperties: {},
+        playAlongExerciseProperties: {},
+      });
     },
   },
   components: {
     ChooseExerciseCard,
+    ChooseExerciseDialog,
   },
 };
 </script>

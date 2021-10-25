@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseUrl: "http://localhost:3000",
-  withCredentials: false,
+  baseURL: `http://localhost:3000`,
+  withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -10,21 +10,10 @@ const apiClient = axios.create({
 });
 
 export default {
-  getExercises(sectionSize, sectionNumber) {
-    return apiClient.get(
-      "/exercises?sectionSize=" +
-        sectionSize +
-        "&sectionNumber=" +
-        sectionNumber
-    );
+  getPublicExercises() {
+    return apiClient.get("/exercises");
   },
-  getExercise(id) {
-    return apiClient.get("/exercises/" + id);
-  },
-  postExercise(exercise) {
-    return apiClient.post("/exercises", exercise);
-  },
-  deleteExercise(id) {
-    return apiClient.delete("/exercises/" + id);
+  getUserExercises() {
+    return apiClient.get("/exercises");
   },
 };
