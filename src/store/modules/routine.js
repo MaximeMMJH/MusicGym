@@ -4,6 +4,7 @@ export const namespaced = true;
 
 export const state = {
   items: [],
+  routine: {},
 };
 
 export const mutations = {
@@ -12,6 +13,9 @@ export const mutations = {
   },
   SET_ROUTINE(state, routine) {
     state.routine = routine;
+  },
+  ADD_ROUTINE(state, routine) {
+    state.items.push(routine);
   },
 };
 
@@ -39,6 +43,17 @@ export const actions = {
           console.log(error);
         });
     }
+  },
+  createRoutine({ commit }, routine) {
+    return RoutineService.postRoutine(routine)
+      .then((response) => {
+        commit("ADD_ROUTINE", response.data);
+        commit("SET_ROUTINE", response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 

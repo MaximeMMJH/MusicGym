@@ -20,7 +20,6 @@ export default {
     chooseExercise() {
       this.$emit("selectedExercise", this.exercise);
     },
-    removeExercise() {},
   },
 };
 </script>

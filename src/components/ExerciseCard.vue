@@ -1,9 +1,21 @@
 <template>
-  <v-card elevation="2">
-    <h3>exercise :)</h3>
-  </v-card>
+  <v-container>
+    <v-card>
+      <v-card-title>
+        {{ exercise.title }}
+      </v-card-title>
+      <v-card-text class="text-left">{{ exercise.description }}</v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    exercise: {
+      type: Object,
+      required: true,
+    },
+  },
+};
 </script>

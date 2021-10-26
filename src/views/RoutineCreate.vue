@@ -13,7 +13,11 @@
                   outlined
                   label="Title"
                 ></v-text-field>
-                <v-textarea outlined label="Description"></v-textarea>
+                <v-textarea
+                  v-model="routine.description"
+                  outlined
+                  label="Description"
+                ></v-textarea>
               </v-card-text>
             </v-card>
           </v-col>
@@ -25,6 +29,7 @@
               v-for="exercise in this.selectedExercises"
               :key="exercise.id"
               :exercise="exercise"
+              @removeExercise="removeExercise"
             />
           </v-col>
         </v-row>
@@ -34,7 +39,9 @@
         </v-row>
 
         <v-row>
-          <v-col> </v-col>
+          <v-col>
+            <v-btn @click="createRoutine" class="mt-5">Create routine</v-btn>
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
@@ -44,6 +51,7 @@
 <script>
 import ChooseExerciseDialog from "../components/ChooseExerciseDialog.vue";
 import ChosenExerciseCard from "@/components/ChosenExerciseCard.vue";
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -58,17 +66,46 @@ export default {
         title: "",
         description: "",
         timesCompleted: 0,
-        userId: "",
-        ExerciseIds: [],
+        userId: this.$store.state.user.user.id,
+        exerciseIds: [],
       };
     },
     addSelectedExercise(value) {
       this.selectedExercises.push(value);
+      this.routine.exerciseIds.push(value.id);
+    },
+    removeExercise(value) {
+      this.$delete(
+        this.selectedExercises,
+        this.selectedExercises.indexOf(value)
+      );
+      this.$delete(
+        this.routine.exerciseIds,
+        this.routine.exerciseIds.indexOf(value.id)
+      );
+    },
+    createRoutine() {
+      this.$store
+        .dispatch("routine/createRoutine", this.routine)
+        .then((response) => {
+          console.log(response);
+          this.$router.push({
+            name: "routine-show",
+            params: { id: response.id },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.routine = this.createFreshRoutineObject();
     },
   },
   components: {
     ChooseExerciseDialog,
     ChosenExerciseCard,
+  },
+  computed: {
+    ...mapState(["user"]),
   },
 };
 </script>

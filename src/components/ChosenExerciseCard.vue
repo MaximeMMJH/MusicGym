@@ -4,7 +4,7 @@
       <v-card-title>
         {{ exercise.title }}
         <v-spacer />
-        <v-icon class="text-right">mdi-delete</v-icon>
+        <v-icon class="text-right" @click="removeExercise">mdi-delete</v-icon>
       </v-card-title>
       <v-card-text class="text-left">{{ exercise.description }}</v-card-text>
     </v-card>
@@ -20,7 +20,9 @@ export default {
     },
   },
   methods: {
-    deleteElement() {},
+    removeExercise() {
+      this.$emit("removeExercise", this.exercise);
+    },
   },
 };
 </script>

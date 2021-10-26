@@ -16,4 +16,7 @@ export default {
   getRoutine(id) {
     return apiClient.get("/routines/" + id);
   },
+  postRoutine(routine) {
+    return apiClient.post("/routines", routine);
+  },
 };
