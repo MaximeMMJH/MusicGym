@@ -8,15 +8,13 @@ import * as routine from "@/store/modules/routine.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
+  state: {},
+  mutations: {},
   actions: {},
   modules: {
     user,
     progress,
     exercise,
-    routine
+    routine,
   },
 });

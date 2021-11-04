@@ -9,6 +9,7 @@ import CreateOptions from "@/views/CreateOptions.vue";
 import Search from "@/views/Search.vue";
 import ExerciseCreate from "@/views/ExerciseCreate.vue";
 import RoutineCreate from "@/views/RoutineCreate.vue";
+import RoutineFollow from "@/views/RoutineFollow.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,12 @@ const routes = [
     path: "/routine/create",
     name: "routine-create",
     component: RoutineCreate,
+  },
+  {
+    path: "/routine/follow/:id",
+    name: "routine-follow",
+    component: RoutineFollow,
+    props: true,
   },
   {
     path: "/register",

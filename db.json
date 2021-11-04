@@ -32,7 +32,10 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "timesCompleted": 3,
       "UserId": "",
-      "ExerciseIds": ""
+      "exerciseIds": [
+        "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
+        "169dd088-583e-4275-83d3-b9df91e4e1c9"
+      ]
     },
     {
       "id": "d5e5b456-fb03-4b97-9cfa-5609e294dfec",
@@ -40,7 +43,10 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "timesCompleted": 5,
       "UserId": "",
-      "ExerciseIds": []
+      "exerciseIds": [
+        "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
+        "169dd088-583e-4275-83d3-b9df91e4e1c9"
+      ]
     },
     {
       "id": "5056c765-121d-4bc4-b6d6-ccec09f21a90",
@@ -48,7 +54,10 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "timesCompleted": 2,
       "UserId": "",
-      "ExerciseIds": []
+      "exerciseIds": [
+        "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
+        "169dd088-583e-4275-83d3-b9df91e4e1c9"
+      ]
     },
     {
       "id": "e46d60f3-35d0-44dd-9b87-554ed5ac5eaa",
@@ -56,15 +65,21 @@
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "timesCompleted": 12,
       "UserId": "",
-      "ExerciseIds": []
+      "exerciseIds": [
+        "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
+        "169dd088-583e-4275-83d3-b9df91e4e1c9"
+      ]
     },
     {
       "id": "b31640c9-5d25-4218-8a08-605ec70abb03",
       "title": "test 5",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "timesCompleted": 6,
-      "UserId": "",
-      "ExerciseIds": []
+      "userId": "",
+      "exerciseIds": [
+        "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
+        "169dd088-583e-4275-83d3-b9df91e4e1c9"
+      ]
     },
     {
       "title": "hey new routine, pretty cooool",
@@ -76,6 +91,17 @@
         "169dd088-583e-4275-83d3-b9df91e4e1c9"
       ],
       "id": "iQDcR4q"
+    },
+    {
+      "title": "fy745hf734h79",
+      "description": "\tvuieruiveruivhero f8e8 fero fj9e j fioer",
+      "timesCompleted": 0,
+      "userId": "13456",
+      "exerciseIds": [
+        "35a8749c-d0f0-435b-81cc-5c27876bce6f",
+        "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0"
+      ],
+      "id": "AuKAZ4t"
     }
   ]
 }
