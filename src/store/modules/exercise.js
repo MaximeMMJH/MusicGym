@@ -23,18 +23,25 @@ export const mutations = {
   SET_EXERCISE(state, exercise) {
     state.exercise = exercise;
   },
-  ADD_EXERCISE(state, exercise) {
-    state.items.push(exercise);
-    //state.items.items.push() ??
-  },
 };
 
 export const actions = {
+  fetchExercise({ commit }, id) {
+    return ExerciseService.getExercise(id)
+      .then((response) => {
+        commit("SET_EXERCISE", response);
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   createExercise({ commit }, exercise) {
+    console.log(exercise);
     return ExerciseService.postExercise(exercise)
-      .then(() => {
-        commit("ADD_EXERCISE", exercise);
-        commit("SET_EXERCISE", exercise);
+      .then((response) => {
+        commit("SET_EXERCISE", response);
+        return response;
       })
       .catch((error) => {
         console.log(error);
@@ -43,7 +50,7 @@ export const actions = {
   fetchUserExercises({ state, commit }, { userId, section }) {
     ExerciseService.getUserExercises(userId, section, state.sectionSize)
       .then((response) => {
-        commit("SET_USER_EXERCISES", response.data);
+        commit("SET_USER_EXERCISES", response);
       })
       .catch((error) => {
         console.log(error);
@@ -52,7 +59,7 @@ export const actions = {
   fetchPublicExercises({ state, commit }, { q, section }) {
     ExerciseService.getPublicExercises(q, section, state.sectionSize)
       .then((response) => {
-        commit("SET_PUBLIC_EXERCISES", response.data);
+        commit("SET_PUBLIC_EXERCISES", response);
       })
       .catch((error) => {
         console.log(error);
@@ -61,7 +68,7 @@ export const actions = {
   fetchLikedExercises({ state, commit }, { section, userId }) {
     ExerciseService.getLikedExercises(userId, section, state.sectionSize)
       .then((response) => {
-        commit("SET_LIKED_EXERCISES", response.data);
+        commit("SET_LIKED_EXERCISES", response);
       })
       .catch((error) => {
         console.log(error);

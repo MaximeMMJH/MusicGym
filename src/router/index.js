@@ -10,7 +10,7 @@ import Search from "@/views/Search.vue";
 import ExerciseCreate from "@/views/ExerciseCreate.vue";
 import RoutineCreate from "@/views/RoutineCreate.vue";
 import RoutineFollow from "@/views/RoutineFollow.vue";
-
+import ExerciseShow from "@/views/ExerciseShow.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -54,6 +54,12 @@ const routes = [
     path: "/routine/:id",
     name: "routine-show",
     component: RoutineShow,
+    props: true,
+  },
+  {
+    path: "/exercise/:id",
+    name: "exercise-show",
+    component: ExerciseShow,
     props: true,
   },
   {
