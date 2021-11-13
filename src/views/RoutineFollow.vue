@@ -1,56 +1,98 @@
 <template>
   <v-container>
     <h1>{{ routine.title }}</h1>
-    <v-btn text @click="previous">
-      <v-icon>mdi-chevron-up</v-icon>
-    </v-btn>
     <v-card class="my-5">
-      <v-window vertical>
-        <v-window-item v-for="id in routine.exerciseIds" :key="id">
-          <v-card>
-            {{ id }}
-          </v-card>
-        </v-window-item>
-      </v-window>
+      <div v-if="this.exercise.exerciseType === 0">
+        <FollowIntervalExercise ref="exerciseComponent" />
+      </div>
     </v-card>
-    <v-btn text @click="next">
-      <v-icon>mdi-chevron-down</v-icon>
-    </v-btn>
+
+    <v-row v-if="this.routine.exerciseIds">
+      <!-- <v-col>
+        <v-btn text @click="previous" elevation="2">
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+      </v-col> -->
+      <v-col class="text-right">
+        <h3>
+          exercise {{ exerciseIndex + 1 }}/{{ this.routine.exerciseIds.length }}
+        </h3>
+      </v-col>
+      <v-col class="text-left">
+        <v-btn
+          text
+          @click="next"
+          elevation="2"
+          v-if="exerciseIndex < this.routine.exerciseIds.length - 1"
+        >
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
+        <v-btn text @click="completeRoutine" elevation="2" v-else>
+          Complete
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import FollowIntervalExercise from "@/components/FollowIntervalExercise.vue";
+
 import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
-      onboarding: 0,
+      exerciseIndex: 0,
     };
   },
   props: {
     id: String,
   },
   created() {
-    this.fetchRoutine(this.id);
+    this.fetchRoutine(this.id).then((response) => {
+      this.fetchExercise(response.exerciseIds[this.exerciseIndex]).then(() => {
+        this.$refs.exerciseComponent.init();
+      });
+    });
   },
   computed: {
     ...mapState({
       routine: (state) => state.routine.routine,
+      exercise: (state) => state.exercise.exercise,
     }),
   },
+  components: {
+    FollowIntervalExercise,
+  },
   methods: {
-    ...mapActions("routine", ["fetchRoutine"]),
+    ...mapActions("routine", ["fetchRoutine", "countRoutineCompletion"]),
+    ...mapActions("exercise", ["fetchExercise"]),
     next() {
-      if (this.onboarding < this.routine.exerciseIds.length) {
-        this.onboarding += 1;
+      if (this.exerciseIndex < this.routine.exerciseIds.length - 1) {
+        this.exerciseIndex++;
+        this.fetchExercise(this.routine.exerciseIds[this.exerciseIndex]).then(
+          () => {
+            this.$refs.exerciseComponent.init();
+          }
+        );
       }
-      console.log(this.onboarding);
     },
     previous() {
-      if (this.onboarding > 0) {
-        this.onboarding -= 1;
+      if (this.exerciseIndex > 0) {
+        this.exerciseIndex--;
+        this.fetchExercise(this.routine.exerciseIds[this.exerciseIndex]).then(
+          () => {
+            this.$refs.exerciseComponent.init();
+          }
+        );
       }
-      console.log(this.onboarding);
+    },
+    completeRoutine() {
+      this.countRoutineCompletion(this.id).then(() => {
+        this.$router.push({
+          name: "home",
+        });
+      });
     },
   },
 };

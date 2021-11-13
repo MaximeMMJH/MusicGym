@@ -2,7 +2,7 @@
   <v-container fill-height fluid>
     <v-row justify="center" align="center">
       <v-col>
-        <h1>New routine: {{ routine.title }}</h1>
+        <h1>New routine</h1>
         <v-row justify="center" class="mt-2">
           <v-col cols="10">
             <v-card>
@@ -88,7 +88,6 @@ export default {
       this.$store
         .dispatch("routine/createRoutine", this.routine)
         .then((response) => {
-          console.log(response);
           this.$router.push({
             name: "routine-show",
             params: { id: response.id },

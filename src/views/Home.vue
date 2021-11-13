@@ -16,13 +16,13 @@ import { mapActions, mapState } from "vuex";
 export default {
   components: { RoutineCard },
   created() {
-    this.fetchRoutines();
+    this.fetchUserRoutines(this.$store.state.user.user.id);
   },
   computed: {
     ...mapState(["routine"]),
   },
   methods: {
-    ...mapActions("routine", ["fetchRoutines"]),
+    ...mapActions("routine", ["fetchUserRoutines"]),
   },
 };
 </script>
