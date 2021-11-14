@@ -25,9 +25,10 @@ const routes = [
     component: ExerciseCreate,
   },
   {
-    path: "/routine/create",
+    path: "/routine/create/:id?",
     name: "routine-create",
     component: RoutineCreate,
+    props: true,
   },
   {
     path: "/routine/follow/:id",

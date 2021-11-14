@@ -6,21 +6,17 @@
         <v-card>
           <v-card-title class="justify-center"> </v-card-title>
           <v-card-text>
-            <v-text-field
-              v-model="exercise.title"
-              outlined
-              label="Title"
-            ></v-text-field>
+            <v-text-field v-model="exercise.title" outlined label="Title" />
             <v-textarea
               v-model="exercise.description"
               outlined
               label="Description"
-            ></v-textarea>
+            />
             <v-select
               :items="exerciseTypes"
               item-text="name"
               item-value="id"
-              v-model="selectedExerciseType"
+              v-model="exercise.exerciseType"
               filled
               label="Select type of exercise"
             ></v-select>
@@ -29,13 +25,11 @@
       </v-col>
       <v-col cols="11">
         <v-card>
-          <div v-if="selectedExerciseType === 0">
+          <div v-if="this.exercise.exerciseType === 0">
             <CreateExerciseIntervalProperties ref="intervalComponent" />
           </div>
-          <div v-else-if="selectedExerciseType === 1">
-            <template>
-              <v-file-input accept="image/*" label="File input"></v-file-input>
-            </template>
+          <div v-else-if="this.exercise.exerciseType === 1">
+            <CreateExerciseNoteProperties ref="noteComponent" />
           </div>
           <div v-else>
             <h3 class="py-6">Select an exercise type</h3>
@@ -45,7 +39,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn :disabled="this.selectedExerciseType < 0" @click="submit"
+        <v-btn :disabled="this.exercise.exerciseType < 0" @click="submit"
           >Create exercise</v-btn
         >
       </v-col>
@@ -55,6 +49,7 @@
 
 <script>
 import CreateExerciseIntervalProperties from "@/components/CreateExerciseIntervalProperties.vue";
+import CreateExerciseNoteProperties from "@/components/CreateExerciseNoteProperties.vue";
 
 import { mapActions } from "vuex";
 export default {
@@ -63,18 +58,18 @@ export default {
       exercise: this.createFreshExercise(),
       exerciseTypes: [
         { name: "Interval recognition", id: 0 },
-        { name: "Play along", id: 1 },
+        { name: "Note", id: 1 },
       ],
-      selectedExerciseType: -1,
     };
   },
   methods: {
     ...mapActions("exercise", ["createExercise"]),
     submit() {
-      if (this.selectedExerciseType === 0) {
+      if (this.exercise.exerciseType === 0) {
         this.exercise.intervalRecognitionExerciseProperties = this.$refs.intervalComponent.intervalExerciseProperties;
         this.createExercise(this.exercise);
-      } else if (this.selectedExerciseType === 1) {
+      } else if (this.exercise.exerciseType === 1) {
+        this.exercise.noteExerciseProperties = this.$refs.noteComponent.noteExerciseProperties;
         this.createExercise(this.exercise);
       } else {
         console.log("invalid exercisetype");
@@ -85,14 +80,18 @@ export default {
         userId: this.$store.state.user.user.id,
         title: "",
         description: "",
+        amountOfLikes: 0,
+        isliked: false,
         intervalRecognitionExerciseProperties: null,
+        noteExerciseProperties: null,
         playAlongExerciseProperties: null,
-        exerciseType: 0,
+        exerciseType: -1,
       };
     },
   },
   components: {
     CreateExerciseIntervalProperties,
+    CreateExerciseNoteProperties,
   },
 };
 </script>

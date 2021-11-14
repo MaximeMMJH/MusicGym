@@ -8,6 +8,7 @@
           :key="exercise.id"
           :exercise="exercise"
         />
+        <PageNavigator :totalPages="5" @switch-page="switchPage" />
       </v-col>
     </v-row>
   </v-container>
@@ -16,6 +17,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import ExerciseCard from "@/components/ExerciseCard.vue";
+import PageNavigator from "@/components/PageNavigator.vue";
 
 export default {
   created() {
@@ -28,12 +30,16 @@ export default {
   },
   components: {
     ExerciseCard,
+    PageNavigator,
   },
   computed: {
     ...mapState(["exercise"]),
   },
   methods: {
     ...mapActions("exercise", ["fetchPublicExercises"]),
+    switchPage(page) {
+      console.log(page);
+    },
   },
 };
 </script>

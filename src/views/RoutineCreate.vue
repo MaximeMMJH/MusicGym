@@ -40,7 +40,9 @@
 
         <v-row>
           <v-col>
-            <v-btn @click="createRoutine" class="mt-5">Create routine</v-btn>
+            <v-btn @click="submit" class="mt-5">
+              {{ editable ? "update routine" : "create routine" }}
+            </v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -51,16 +53,37 @@
 <script>
 import ChooseExerciseDialog from "../components/ChooseExerciseDialog.vue";
 import ChosenExerciseCard from "@/components/ChosenExerciseCard.vue";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
+  props: {
+    id: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
       selectedExercises: [],
       routine: this.createFreshRoutineObject(),
+      editable: !!this.id,
     };
   },
+  created() {
+    if (this.editable) {
+      this.fetchRoutine(this.id).then((response) => {
+        this.routine = response;
+        this.fetchExercises(this.routine.exerciseIds);
+      });
+    }
+  },
   methods: {
+    ...mapActions("routine", [
+      "fetchRoutine",
+      "createRoutine",
+      "updateRoutine",
+    ]),
+    ...mapActions("exercise", ["fetchExercise"]),
     createFreshRoutineObject() {
       return {
         title: "",
@@ -84,18 +107,31 @@ export default {
         this.routine.exerciseIds.indexOf(value.id)
       );
     },
-    createRoutine() {
-      this.$store
-        .dispatch("routine/createRoutine", this.routine)
-        .then((response) => {
+    fetchExercises(exerciseIds) {
+      for (var id of exerciseIds) {
+        this.fetchExercise(id).then((response) => {
+          this.selectedExercises.push(response);
+        });
+      }
+    },
+    submit() {
+      if (this.editable) {
+        this.updateRoutine({ routine: this.routine, id: this.id }).then(
+          (response) => {
+            this.$router.push({
+              name: "routine-show",
+              params: { id: response.id },
+            });
+          }
+        );
+      } else {
+        this.createRoutine(this.routine).then((response) => {
           this.$router.push({
             name: "routine-show",
             params: { id: response.id },
           });
-        })
-        .catch((error) => {
-          console.log(error);
         });
+      }
       this.routine = this.createFreshRoutineObject();
     },
   },

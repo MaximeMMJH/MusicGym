@@ -5,6 +5,7 @@ export const namespaced = true;
 export const state = {
   items: [],
   routine: {},
+  pageSize: 2,
 };
 
 export const mutations = {
@@ -24,10 +25,11 @@ export const mutations = {
 };
 
 export const actions = {
-  fetchUserRoutines({ commit }, id) {
-    RoutineService.getUserRoutines(id)
+  fetchUserRoutines({ state, commit }, { userId, pageNumber }) {
+    return RoutineService.getUserRoutines(userId, pageNumber, state.pageSize)
       .then((response) => {
-        commit("SET_ROUTINES", response.data);
+        commit("SET_ROUTINES", response.data.items);
+        return response.data;
       })
       .catch((error) => {
         console.log(error);
@@ -69,6 +71,16 @@ export const actions = {
     RoutineService.deleteRoutine(routine.id)
       .then(() => {
         commit("REMOVE_ROUTINE", routine);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+  updateRoutine({ commit }, { routine, id }) {
+    return RoutineService.putRoutine(routine, id)
+      .then((response) => {
+        commit("SET_ROUTINE", response.data);
+        return response.data;
       })
       .catch((error) => {
         console.log(error);

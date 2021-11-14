@@ -10,8 +10,15 @@ const apiClient = axios.create({
 });
 
 export default {
-  getUserRoutines(id) {
-    return apiClient.get("/routines/users/" + id);
+  getUserRoutines(id, pageNumber, pageSize) {
+    return apiClient.get(
+      "/routines/users/" +
+        id +
+        "?pageNumber=" +
+        pageNumber +
+        "&pageSize=" +
+        pageSize
+    );
   },
   getRoutine(id) {
     return apiClient.get("/routines/" + id);
@@ -24,5 +31,8 @@ export default {
   },
   deleteRoutine(id) {
     return apiClient.delete("/routines/" + id);
+  },
+  putRoutine(routine, id) {
+    return apiClient.put("/routines/" + id, routine);
   },
 };

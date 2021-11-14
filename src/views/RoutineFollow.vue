@@ -5,6 +5,9 @@
       <div v-if="this.exercise.exerciseType === 0">
         <FollowIntervalExercise ref="exerciseComponent" />
       </div>
+      <div v-else-if="this.exercise.exerciseType === 1">
+        <FollowNoteExercise ref="exerciseComponent" />
+      </div>
     </v-card>
 
     <v-row v-if="this.routine.exerciseIds">
@@ -37,6 +40,7 @@
 
 <script>
 import FollowIntervalExercise from "@/components/FollowIntervalExercise.vue";
+import FollowNoteExercise from "@/components/FollowNoteExercise.vue";
 
 import { mapActions, mapState } from "vuex";
 export default {
@@ -63,6 +67,7 @@ export default {
   },
   components: {
     FollowIntervalExercise,
+    FollowNoteExercise
   },
   methods: {
     ...mapActions("routine", ["fetchRoutine", "countRoutineCompletion"]),
