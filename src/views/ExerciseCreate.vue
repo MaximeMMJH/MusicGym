@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>New exercise</h1>
+    <h1>{{ editable ? "Edit exercise" : "New exercise" }}</h1>
     <v-row justify="center" class="mt-2">
       <v-col cols="11">
         <v-card>
@@ -13,6 +13,7 @@
               label="Description"
             />
             <v-select
+              :disabled="editable"
               :items="exerciseTypes"
               item-text="name"
               item-value="id"
@@ -26,10 +27,32 @@
       <v-col cols="11">
         <v-card>
           <div v-if="this.exercise.exerciseType === 0">
-            <CreateExerciseIntervalProperties ref="intervalComponent" />
+            <h2 class="pt-2">Select intervals</h2>
+            <v-card-actions>
+              <v-btn-toggle
+                multiple
+                v-model="intervalExerciseProperties.intervals"
+              >
+                <v-row>
+                  <v-col>
+                    <v-btn
+                      class="ma-2"
+                      v-for="interval in this.intervals"
+                      :key="interval"
+                      width="120"
+                      >{{ interval }}</v-btn
+                    >
+                  </v-col>
+                </v-row>
+              </v-btn-toggle>
+            </v-card-actions>
           </div>
           <div v-else-if="this.exercise.exerciseType === 1">
-            <CreateExerciseNoteProperties ref="noteComponent" />
+            <v-textarea
+              v-model="noteExerciseProperties.content"
+              outlined
+              label="Note to self :)"
+            />
           </div>
           <div v-else>
             <h3 class="py-6">Select an exercise type</h3>
@@ -39,20 +62,25 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-btn :disabled="this.exercise.exerciseType < 0" @click="submit"
-          >Create exercise</v-btn
-        >
+        <v-btn :disabled="this.exercise.exerciseType < 0" @click="submit">
+          {{ editable ? "Update exercise" : "Create exercise" }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import CreateExerciseIntervalProperties from "@/components/CreateExerciseIntervalProperties.vue";
-import CreateExerciseNoteProperties from "@/components/CreateExerciseNoteProperties.vue";
-
+import IntervalCalculator from "@/services/logic/IntervalCalculator.js";
 import { mapActions } from "vuex";
+
 export default {
+  props: {
+    id: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
       exercise: this.createFreshExercise(),
@@ -60,19 +88,47 @@ export default {
         { name: "Interval recognition", id: 0 },
         { name: "Note", id: 1 },
       ],
+      editable: !!this.id,
+      intervals: this.getAllIntervals(),
+      intervalExerciseProperties: this.createFreshIntervalProperties(),
+      noteExerciseProperties: this.createFreshNoteProperties(),
     };
   },
+  mounted() {
+    if (this.editable) {
+      this.fetchExercise(this.id).then((response) => {
+        this.exercise = response;
+        if (response.exerciseType === 0) {
+          this.intervalExerciseProperties =
+            response.intervalRecognitionExerciseProperties;
+        } else if (response.exerciseType === 1) {
+          this.noteExerciseProperties = response.noteExerciseProperties;
+        }
+      });
+    }
+  },
   methods: {
-    ...mapActions("exercise", ["createExercise"]),
+    getAllIntervals() {
+      return IntervalCalculator.getAllIntervals();
+    },
+    ...mapActions("exercise", [
+      "createExercise",
+      "fetchExercise",
+      "updateExercise",
+    ]),
     submit() {
       if (this.exercise.exerciseType === 0) {
-        this.exercise.intervalRecognitionExerciseProperties = this.$refs.intervalComponent.intervalExerciseProperties;
-        this.createExercise(this.exercise);
+        this.exercise.intervalRecognitionExerciseProperties = this.intervalExerciseProperties;
       } else if (this.exercise.exerciseType === 1) {
-        this.exercise.noteExerciseProperties = this.$refs.noteComponent.noteExerciseProperties;
-        this.createExercise(this.exercise);
+        this.exercise.noteExerciseProperties = this.noteExerciseProperties;
       } else {
         console.log("invalid exercisetype");
+      }
+
+      if (this.editable) {
+        this.updateExercise({ id: this.exercise.id, exercise: this.exercise });
+      } else {
+        this.createExercise(this.exercise);
       }
     },
     createFreshExercise() {
@@ -88,10 +144,18 @@ export default {
         exerciseType: -1,
       };
     },
+    createFreshIntervalProperties() {
+      return {
+        intervals: [],
+        ascentionType: 0,
+      };
+    },
+    createFreshNoteProperties() {
+      return {
+        content: "",
+      };
+    },
   },
-  components: {
-    CreateExerciseIntervalProperties,
-    CreateExerciseNoteProperties,
-  },
+  components: {},
 };
 </script>

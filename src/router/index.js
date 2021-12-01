@@ -11,6 +11,7 @@ import ExerciseCreate from "@/views/ExerciseCreate.vue";
 import RoutineCreate from "@/views/RoutineCreate.vue";
 import RoutineFollow from "@/views/RoutineFollow.vue";
 import ExerciseShow from "@/views/ExerciseShow.vue";
+import Login from "@/views/Login.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -20,9 +21,15 @@ const routes = [
     component: Home,
   },
   {
-    path: "/exercise/create",
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    path: "/exercise/create/:id?",
     name: "exercise-create",
     component: ExerciseCreate,
+    props: true,
   },
   {
     path: "/routine/create/:id?",

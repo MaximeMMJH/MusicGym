@@ -22,18 +22,32 @@
           @selectedExercise="selectedExercise"
         />
       </v-card-text>
+      <v-card-actions>
+        <PageNavigator
+          @switch-page="switchUserPage"
+          v-if="userExercisesPageResponse"
+          :totalPages="this.userExercisesPageResponse.totalPages"
+        />
+      </v-card-actions>
 
       <v-card-text>
         <h4>
           Liked exercises
         </h4>
         <ChooseExerciseCard
-          v-for="exercise in exercise.publicExercises"
+          v-for="exercise in exercise.likedExercises"
           :key="exercise.id"
           :exercise="exercise"
           @selectedExercise="selectedExercise"
         />
       </v-card-text>
+      <v-card-actions>
+        <PageNavigator
+          @switch-page="switchLikedPage"
+          v-if="likedExercisesPageResponse"
+          :totalPages="this.likedExercisesPageResponse.totalPages"
+        />
+      </v-card-actions>
 
       <v-card-actions>
         <v-btn text @click="chooseExercise">
@@ -51,6 +65,7 @@
 <script>
 import ChooseExerciseCard from "@/components/ChooseExerciseCard.vue";
 //import ChosenExerciseCard from "@/components/ChosenExerciseCard.vue";
+import PageNavigator from "@/components/PageNavigator.vue";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -58,13 +73,21 @@ export default {
     return {
       selected: Object,
       dialog: false,
+      userExercisesPageResponse: null,
+      likedExercisesPageResponse: null,
     };
   },
   watch: {
     dialog(visible) {
       if (visible) {
-        this.fetchUserExercises("", 1);
-        this.fetchPublicExercises(1);
+        this.fetchUserExercises({
+          userId: this.$store.state.user.user.id,
+          pageNumber: 1,
+        }).then((response) => (this.userExercisesPageResponse = response));
+        this.fetchLikedExercises({
+          userId: this.$store.state.user.user.id,
+          pageNumber: 1,
+        }).then((response) => (this.likedExercisesPageResponse = response));
       }
     },
   },
@@ -72,7 +95,7 @@ export default {
     ...mapState(["exercise"]),
   },
   methods: {
-    ...mapActions("exercise", ["fetchUserExercises", "fetchPublicExercises"]),
+    ...mapActions("exercise", ["fetchUserExercises", "fetchLikedExercises"]),
     chooseExercise() {
       this.dialog = false;
       this.$emit("selectedExercise", this.selected);
@@ -80,9 +103,22 @@ export default {
     selectedExercise(value) {
       this.selected = value;
     },
+    switchUserPage(page) {
+      this.fetchUserExercises({
+        userId: this.$store.state.user.user.id,
+        pageNumber: page,
+      }).then((response) => (this.userExercisesPageResponse = response));
+    },
+    switchLikedPage(page) {
+      this.fetchLikedExercises({
+        userId: this.$store.state.user.user.id,
+        pageNumber: page,
+      }).then((response) => (this.likedExercisesPageResponse = response));
+    },
   },
   components: {
     ChooseExerciseCard,
+    PageNavigator,
     //ChosenExerciseCard,
   },
 };

@@ -2,7 +2,7 @@
   <v-container fill-height fluid>
     <v-row justify="center" align="center">
       <v-col>
-        <h1>New routine</h1>
+        <h1>{{ editable ? "Edit routine" : "New routine" }}</h1>
         <v-row justify="center" class="mt-2">
           <v-col cols="10">
             <v-card>

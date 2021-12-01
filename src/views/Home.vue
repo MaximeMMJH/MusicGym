@@ -23,10 +23,11 @@ export default {
   components: { RoutineCard, PageNavigator },
   data() {
     return {
-      pageResponse: Object,
+      pageResponse: null,
     };
   },
   created() {
+    console.log(process.env.VUE_APP_TEST);
     this.fetchUserRoutines({
       userId: this.$store.state.user.user.id,
       pageNumber: 1,
