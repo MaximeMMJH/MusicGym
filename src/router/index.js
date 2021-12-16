@@ -9,7 +9,9 @@ import CreateOptions from "@/views/CreateOptions.vue";
 import Search from "@/views/Search.vue";
 import ExerciseCreate from "@/views/ExerciseCreate.vue";
 import RoutineCreate from "@/views/RoutineCreate.vue";
-
+import RoutineFollow from "@/views/RoutineFollow.vue";
+import ExerciseShow from "@/views/ExerciseShow.vue";
+import Login from "@/views/Login.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,14 +21,27 @@ const routes = [
     component: Home,
   },
   {
-    path: "/exercise/create",
-    name: "exercise-create",
-    component: ExerciseCreate,
+    path: "/login",
+    name: "login",
+    component: Login,
   },
   {
-    path: "/routine/create",
+    path: "/exercise/create/:id?",
+    name: "exercise-create",
+    component: ExerciseCreate,
+    props: true,
+  },
+  {
+    path: "/routine/create/:id?",
     name: "routine-create",
     component: RoutineCreate,
+    props: true,
+  },
+  {
+    path: "/routine/follow/:id",
+    name: "routine-follow",
+    component: RoutineFollow,
+    props: true,
   },
   {
     path: "/register",
@@ -47,6 +62,12 @@ const routes = [
     path: "/routine/:id",
     name: "routine-show",
     component: RoutineShow,
+    props: true,
+  },
+  {
+    path: "/exercise/:id",
+    name: "exercise-show",
+    component: ExerciseShow,
     props: true,
   },
   {

@@ -10,7 +10,7 @@
     },
     {
       "id": "84e323e4-c8b4-4ee3-8bfe-0ff28af687e0",
-      "title": "test 1",
+      "title": "test 2",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "exerciseType": "IntervalRecognition",
       "intervalRecognitionExerciseProperties": {},
@@ -18,23 +18,7 @@
     },
     {
       "id": "169dd088-583e-4275-83d3-b9df91e4e1c9",
-      "title": "test 1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "exerciseType": "IntervalRecognition",
-      "intervalRecognitionExerciseProperties": {},
-      "playAlongExerciseProperties": {}
-    },
-    {
-      "id": "802b9926-f292-483b-953c-5fdd2086b320",
-      "title": "test 1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "exerciseType": "IntervalRecognition",
-      "intervalRecognitionExerciseProperties": {},
-      "playAlongExerciseProperties": {}
-    },
-    {
-      "id": "77902ecd-4707-43ff-a107-454906b8d814",
-      "title": "test 1",
+      "title": "test 3",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "exerciseType": "IntervalRecognition",
       "intervalRecognitionExerciseProperties": {},
@@ -43,44 +27,15 @@
   ],
   "routines": [
     {
-      "id": "7b7484e1-2289-48ab-8524-6752d3922bdb",
-      "title": "test 1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "timesCompleted": 3,
-      "UserId": "",
-      "ExerciseIds": ""
-    },
-    {
-      "id": "d5e5b456-fb03-4b97-9cfa-5609e294dfec",
-      "title": "test 2",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "timesCompleted": 5,
-      "UserId": "",
-      "ExerciseIds": []
-    },
-    {
-      "id": "5056c765-121d-4bc4-b6d6-ccec09f21a90",
-      "title": "test 3",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "timesCompleted": 2,
-      "UserId": "",
-      "ExerciseIds": []
-    },
-    {
-      "id": "e46d60f3-35d0-44dd-9b87-554ed5ac5eaa",
-      "title": "test 4",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "timesCompleted": 12,
-      "UserId": "",
-      "ExerciseIds": []
-    },
-    {
-      "id": "b31640c9-5d25-4218-8a08-605ec70abb03",
-      "title": "test 5",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "timesCompleted": 6,
-      "UserId": "",
-      "ExerciseIds": []
+      "title": "test routine",
+      "description": "routine with interval exercises",
+      "timesCompleted": 0,
+      "userId": "2954b23c-7d1d-49c5-8f9b-27686e73b357",
+      "exerciseIds": [
+        "08d9a5d4-9e9d-4324-8792-4ec5a7fe3423",
+        "08d9a5de-dd7e-4445-8d36-a9d8a31b422e"
+      ],
+      "id": "08d9a5de-dd7e-4445-9f36-a9jf831b422e"
     }
   ]
 }

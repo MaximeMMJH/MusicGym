@@ -4,19 +4,19 @@ import * as user from "@/store/modules/user.js";
 import * as progress from "@/store/modules/progress.js";
 import * as exercise from "@/store/modules/exercise.js";
 import * as routine from "@/store/modules/routine.js";
+import * as auth from "@/store/modules/auth.js";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
+  state: {},
+  mutations: {},
   actions: {},
   modules: {
     user,
     progress,
     exercise,
-    routine
+    routine,
+    auth,
   },
 });

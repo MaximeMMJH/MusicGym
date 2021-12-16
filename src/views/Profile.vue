@@ -65,27 +65,60 @@
     <v-row align="center" justify="center">
       <v-col cols="12">
         <h1>Your exercises</h1>
+        <ExerciseCard
+          v-for="exercise in exercise.userExercises"
+          :key="exercise.id"
+          :exercise="exercise"
+        />
+        <PageNavigator
+          v-if="pageResponse"
+          :totalPages="this.pageResponse.totalPages"
+          @switch-page="switchPage"
+        />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import PageNavigator from "@/components/PageNavigator.vue";
+import ExerciseCard from "@/components/ExerciseCard.vue";
 import UserService from "@/services/UserService.js";
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   data() {
     return {
       dialog: false,
+      pageResponse: null,
     };
   },
-  components: {},
+  created() {
+    this.fetchUserExercises({
+      userId: this.$store.state.user.user.id,
+      pageNumber: 1,
+    }).then((response) => {
+      this.pageResponse = response;
+    });
+  },
+  components: {
+    ExerciseCard,
+    PageNavigator,
+  },
   methods: {
+    ...mapActions("exercise", ["fetchUserExercises"]),
     delete() {
       UserService.delete(this.user.id);
     },
+    switchPage(page) {
+      this.fetchUserExercises({
+        userId: this.$store.state.user.user.id,
+        pageNumber: page,
+      }).then((response) => {
+        this.pageResponse = response;
+      });
+    },
   },
-  computed: mapState(["user"]),
+  computed: mapState(["user", "exercise"]),
 };
 </script>

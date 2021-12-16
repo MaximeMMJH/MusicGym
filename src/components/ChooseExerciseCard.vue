@@ -1,12 +1,9 @@
 <template>
   <v-container class="px-0">
-    <v-card>
-      <v-card-title>
+    <v-card @click="chooseExercise">
+      <v-card-title class="justify-center">
         {{ exercise.title }}
-        <v-spacer />
-        <v-icon class="text-right">mdi-delete</v-icon>
       </v-card-title>
-      <v-card-text class="text-left">{{ exercise.description }}</v-card-text>
     </v-card>
   </v-container>
 </template>
@@ -14,10 +11,15 @@
 <script>
 export default {
   props: {
-    exercise: Object,
+    exercise: {
+      type: Object,
+      required: true,
+    },
   },
   methods: {
-    deleteElement() {},
+    chooseExercise() {
+      this.$emit("selectedExercise", this.exercise);
+    },
   },
 };
 </script>

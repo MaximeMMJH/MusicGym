@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseUrl: `http://localhost:3000`,
+  baseUrl: `http://localhost:5010`,
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -20,14 +20,23 @@ export default {
     //     section
     // );
     console.log(section, sectionSize, userId);
-    return apiClient.get("/exercises/");
+    return apiClient.get("/exercises");
   },
-  getPublicExercises(section, sectionSize) {
+  getPublicExercises(q, section, sectionSize) {
     // return apiClient.get(
-    //   "/exercises?sectionSize=" + sectionSize + "&section=" + section
+    //   "/exercises?sectionSize=" +
+    //     sectionSize +
+    //     "&section=" +
+    //     section +
+    //     "&q=" +
+    //     q
     // );
+    console.log(q, section, sectionSize);
+    return apiClient.get("/exercises");
+  },
+  getLikedExercises(section, sectionSize) {
     console.log(section, sectionSize);
-    return apiClient.get("/exercises/");
+    return apiClient.get("/exercises");
   },
   getExercise(id) {
     return apiClient.get("/exercises/" + id);
