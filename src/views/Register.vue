@@ -4,16 +4,14 @@
       <v-row align="center" justify="center">
         <v-col cols="10">
           <h1>Create account</h1>
-          <v-card class="elevation-2">
-            <v-col cols="12">
-              <v-text-field label="Username" v-model="user.username" />
-              <v-text-field label="Email" v-model="user.email" />
-              <v-text-field label="Password" type="password" />
-            </v-col>
-            <v-col>
-              <v-btn class="primary" v-on:click="create">register</v-btn>
-            </v-col>
-          </v-card>
+          <v-col cols="12">
+            <v-text-field label="Username" v-model="user.username" />
+            <v-text-field label="Email" v-model="user.email" />
+            <v-text-field label="Password" type="password" />
+          </v-col>
+          <v-col>
+            <v-btn v-on:click="create">register</v-btn>
+          </v-col>
         </v-col>
       </v-row>
     </v-container>
