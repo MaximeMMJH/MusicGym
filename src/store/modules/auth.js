@@ -23,7 +23,20 @@ export const mutations = {
 export const actions = {
   login({ commit }, user) {
     AuthService.login(user).then((response) => {
-      commit("SET_JWT_TOKEN", response);
+      console.log(commit);
+      console.log(response);
+
+      AuthService.retrieveToken(response).then((token) => {
+        console.log(token);
+      });
+    });
+  },
+  register({ commit }, user) {
+    return AuthService.register(user).then((response) => {
+      console.log(commit);
+      console.log(response);
+
+      return response;
     });
   },
 };
