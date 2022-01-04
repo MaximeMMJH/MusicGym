@@ -52,7 +52,11 @@ export default {
   },
   methods: {
     requestLogin() {
-      this.login(this.user);
+      this.login(this.user).then(() => {
+        this.$router.push({
+          name: "home",
+        });
+      });
     },
     ...mapActions("auth", ["login"]),
     getFreshUserObj() {
