@@ -1,13 +1,10 @@
 import AuthService from "@/services/AuthService.js";
+import UserService from "@/services/UserService.js";
 
 export const namespaced = true;
 
 export const state = {
-  currentUser: {
-    id: "2954b23c-7d1d-49c5-8f9b-27686e73b357",
-    username: "MaximeMMJH",
-    email: "maxime.heuver@gmail.com",
-  },
+  currentUser: {},
   token: "",
 };
 
@@ -24,14 +21,30 @@ export const actions = {
   login({ commit }, user) {
     AuthService.retrieveToken(user).then((response) => {
       commit("SET_JWT_TOKEN", response.access_token);
+      console.log(response.access_token);
+
+      AuthService.retrieveUserInfo().then((response) => {
+        console.log(response);
+
+        UserService.getAuthUser(response.sub).then((response) => {
+          console.log(response);
+
+          commit("SET_CURRENT_USER", response);
+        });
+      });
     });
   },
   register({ commit }, user) {
     return AuthService.register(user).then((response) => {
       console.log(commit);
-      console.log(response);
 
       return response;
     });
   },
+};
+
+export const getters = {
+    getCurrentUserId: (state) => {
+        return state.currentUser.id;
+    },
 };

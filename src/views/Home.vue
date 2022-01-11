@@ -29,7 +29,7 @@ export default {
   created() {
     //console.log(process.env.VUE_APP_TEST);
     this.fetchUserRoutines({
-      userId: this.$store.state.user.user.id,
+      userId: this.$store.state.auth.currentUser.id,
       pageNumber: 1,
     }).then((response) => {
       this.pageResponse = response;

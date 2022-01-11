@@ -87,6 +87,9 @@ import UserService from "@/services/UserService.js";
 import { mapActions, mapState } from "vuex";
 
 export default {
+  props: {
+    id: String,
+  },
   data() {
     return {
       dialog: false,
@@ -94,11 +97,15 @@ export default {
     };
   },
   created() {
-    this.fetchUserExercises({
-      userId: this.$store.state.user.user.id,
-      pageNumber: 1,
-    }).then((response) => {
-      this.pageResponse = response;
+    console.log(this.$store.state.auth.currentUser.id);
+
+    this.fetchUser(this.id).then(() => {
+      this.fetchUserExercises({
+        userId: this.id,
+        pageNumber: 1,
+      }).then((response) => {
+        this.pageResponse = response;
+      });
     });
   },
   components: {
@@ -107,12 +114,13 @@ export default {
   },
   methods: {
     ...mapActions("exercise", ["fetchUserExercises"]),
+    ...mapActions("user", ["fetchUser"]),
     delete() {
       UserService.delete(this.user.id);
     },
     switchPage(page) {
       this.fetchUserExercises({
-        userId: this.$store.state.user.user.id,
+        userId: this.id,
         pageNumber: page,
       }).then((response) => {
         this.pageResponse = response;

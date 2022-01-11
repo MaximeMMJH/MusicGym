@@ -89,7 +89,7 @@ export default {
         title: "",
         description: "",
         timesCompleted: 0,
-        userId: this.$store.state.user.user.id,
+        userId: this.$store.state.auth.currentUser.id,
         exerciseIds: [],
       };
     },

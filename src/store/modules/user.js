@@ -1,13 +1,22 @@
+import UserService from "@/services/UserService.js";
+
 export const namespaced = true;
 
 export const state = {
-  user: {
-    id: "093e75b8-9138-43f0-ac98-1461c805fe30",
-    username: "MaximeMMJH",
-    email: "maxime.heuver@gmail.com",
+  user: {},
+};
+
+export const mutations = {
+  SET_USER(state, user) {
+    state.user = user;
   },
 };
 
-export const mutations = {};
-
-export const actions = {};
+export const actions = {
+  fetchUser({ commit }, userId) {
+    UserService.getUser(userId).then((response) => {
+      console.log(response);
+      commit("SET_USER", response);
+    });
+  },
+};

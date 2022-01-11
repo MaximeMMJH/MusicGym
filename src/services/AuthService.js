@@ -1,13 +1,18 @@
 import axios from "axios";
+import store from "../store";
 
 const apiClient = axios.create({
-  baseURL: `http://20.76.64.171`,
+  baseURL: `http://20.67.62.69`,
   withCredentials: false, // This is the default
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.token,
   },
+});
+
+apiClient.interceptors.request.use((config) => {
+  config.headers = { Authorization: "Bearer " + store.state.auth.token };
+  return config;
 });
 
 export default {
@@ -38,6 +43,11 @@ export default {
 
     return await apiClient
       .post("/connect/token", params, config)
+      .then((response) => response.data);
+  },
+  async retrieveUserInfo() {
+    return await apiClient
+      .get("/connect/userinfo")
       .then((response) => response.data);
   },
 };

@@ -50,9 +50,10 @@ const routes = [
     component: Register,
   },
   {
-    path: "/profile",
+    path: "/profile/:id",
     name: "profile",
     component: Profile,
+    props: true,
   },
   {
     path: "/profile/edit",

@@ -9,28 +9,24 @@
 </template>
 
 <script lang="js">
+import { mapGetters } from "vuex";
 
-  export default  {
-    name: "Navigation",
-    props: [],
-    mounted () {
-
+export default  {
+  name: "Navigation",
+  data () {
+    return {};
+  },
+  computed: {
+    ...mapGetters("auth", ["getCurrentUserId"]),
+    navItems() {
+      const params = { id: this.getCurrentUserId };
+      return [
+        { title: 'Home', route: { name: 'home' }, icon: 'mdi-home' },
+        { title: 'Create solution', route: { name: 'create-options' }, icon: 'mdi-plus-circle' },
+        { title: 'Search', route: { name: 'search' }, icon: 'mdi-magnify' },
+        { title: 'Profile', route: { name: 'profile', params }, icon: 'mdi-account-circle'}
+      ];
     },
-    data () {
-      return {
-        navItems: [
-          { title: 'Home', route: { name: 'home' }, icon: 'mdi-home' },
-          { title: 'Create solution', route: { name: 'create-options' }, icon: 'mdi-plus-circle' },
-          { title: 'Search', route: { name: 'search' }, icon: 'mdi-magnify' },
-          { title: 'Profile', route: { name: 'profile', params: { author:'Jan Janssen'} }, icon: 'mdi-account-circle'}
-        ]
-      }
-    },
-    methods: {
-
-    },
-    computed: {
-
-    }
+  }
 }
 </script>

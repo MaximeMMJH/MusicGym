@@ -62,7 +62,7 @@ export default {
       this.fetchPublicExercises({
         q: this.activeQuery,
         pageNumber: page,
-        userId: this.$store.state.user.user.id,
+        userId: this.$store.state.auth.currentUser.id,
       }).then((response) => {
         this.pageResponse = response;
       });

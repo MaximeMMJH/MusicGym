@@ -133,7 +133,7 @@ export default {
     },
     createFreshExercise() {
       return {
-        userId: this.$store.state.user.user.id,
+        userId: this.$store.state.auth.currentUser.id,
         title: "",
         description: "",
         amountOfLikes: 0,
