@@ -1,6 +1,6 @@
 <template>
   <v-container mt-8>
-    <h1>Your routines</h1>
+    <h1>Your routines test</h1>
     <RoutineCard
       v-for="routine in routine.items"
       :key="routine.id"
