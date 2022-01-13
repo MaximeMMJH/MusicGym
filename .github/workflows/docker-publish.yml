@@ -8,12 +8,11 @@ name: Docker
 on:
   schedule:
     - cron: '28 8 * * *'
-  push:
-    branches: [ main ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ main ]
+  workflow_run:
+    workflows: [ "Node.js CI" ]
+    branches: [ main, develop ]
+    types: 
+      - completed
 
 env:
   # Use docker.io for Docker Hub if empty
