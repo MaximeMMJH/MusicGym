@@ -12,4 +12,10 @@ describe("AppHeader", () => {
     await wrapper.setData({ loggedIn: true });
     expect(wrapper.find("button").isVisible()).toBe(true);
   });
+
+  it("show button when user is logged in", async () => {
+    const wrapper = mount(AppHeader);
+    await wrapper.setData({ loggedIn: true });
+    expect(wrapper.find("button").isVisible()).toBe(false);
+  });
 });

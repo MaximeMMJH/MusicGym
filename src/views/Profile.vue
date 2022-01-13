@@ -65,13 +65,19 @@
     <v-row align="center" justify="center">
       <v-col cols="12">
         <h1>Your exercises</h1>
+
         <ExerciseCard
           v-for="exercise in exercise.userExercises"
           :key="exercise.id"
           :exercise="exercise"
         />
+
         <PageNavigator
-          v-if="pageResponse"
+          v-if="
+            this.pageResponse == null
+              ? false
+              : this.pageResponse.items.length != 0
+          "
           :totalPages="this.pageResponse.totalPages"
           @switch-page="switchPage"
         />
@@ -97,8 +103,6 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.auth.currentUser.id);
-
     this.fetchUser(this.id).then(() => {
       this.fetchUserExercises({
         userId: this.id,

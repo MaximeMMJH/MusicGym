@@ -7,7 +7,9 @@
       :routine="routine"
     />
     <PageNavigator
-      v-if="pageResponse"
+      v-if="
+        this.pageResponse == null ? false : this.pageResponse.items.length != 0
+      "
       :totalPages="this.pageResponse.totalPages"
       @switch-page="switchPage"
     />
@@ -27,7 +29,6 @@ export default {
     };
   },
   created() {
-    //console.log(process.env.VUE_APP_TEST);
     this.fetchUserRoutines({
       userId: this.$store.state.auth.currentUser.id,
       pageNumber: 1,

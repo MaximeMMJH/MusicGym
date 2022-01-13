@@ -35,31 +35,35 @@
       </v-row>
     </div>
     <div v-else>
-      <v-card>
-        <v-row>
-          <v-col cols="9">
-            <v-card-title class="pt-0">
-              {{ exercise.title }}
-            </v-card-title>
-            <v-card-text class="text-left">{{
-              exercise.description
-            }}</v-card-text>
-          </v-col>
-          <v-col class="text-right" cols="3">
-            <v-icon
-              @click="unlike"
-              v-if="this.exercise.isLiked"
-              size="40"
-              class="pr-3"
-            >
-              mdi-heart
-            </v-icon>
-            <v-icon @click="like" v-else size="40" class="pr-3"
-              >mdi-heart-outline</v-icon
-            >
-          </v-col>
-        </v-row>
-      </v-card>
+      <v-row>
+        <v-col class="my-4">
+          <v-card>
+            <v-row>
+              <v-col cols="9">
+                <v-card-title class="pt-0">
+                  {{ exercise.title }}
+                </v-card-title>
+                <v-card-text class="text-left">{{
+                  exercise.description
+                }}</v-card-text>
+              </v-col>
+              <v-col class="text-right" cols="3">
+                <v-icon
+                  @click="unlike"
+                  v-if="this.exercise.isLiked"
+                  size="40"
+                  class="pr-3"
+                >
+                  mdi-heart
+                </v-icon>
+                <v-icon @click="like" v-else size="40" class="pr-3"
+                  >mdi-heart-outline</v-icon
+                >
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
     </div>
   </v-container>
 </template>

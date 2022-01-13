@@ -15,7 +15,6 @@ export const mutations = {
 export const actions = {
   fetchUser({ commit }, userId) {
     UserService.getUser(userId).then((response) => {
-      console.log(response);
       commit("SET_USER", response);
     });
   },

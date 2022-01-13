@@ -52,7 +52,9 @@ export default {
   },
   methods: {
     requestLogin() {
-      this.login(this.user).then(() => {
+      this.login(this.user).then((token) => {
+        console.log(token);
+
         this.$router.push({
           name: "home",
         });

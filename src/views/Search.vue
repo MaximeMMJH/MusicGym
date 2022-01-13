@@ -23,7 +23,11 @@
           :exercise="exercise"
         />
         <PageNavigator
-          v-if="pageResponse"
+          v-if="
+            this.pageResponse == null
+              ? false
+              : this.pageResponse.items.length != 0
+          "
           :totalPages="this.pageResponse.totalPages"
           @switch-page="switchPage"
         />

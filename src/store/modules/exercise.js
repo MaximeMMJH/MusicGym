@@ -8,7 +8,7 @@ export const state = {
   likedExercises: [],
   fetchedExercises: [],
   exercise: {},
-  pageSize: 2,
+  pageSize: 4,
 };
 
 export const mutations = {

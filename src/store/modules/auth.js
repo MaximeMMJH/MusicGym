@@ -6,6 +6,7 @@ export const namespaced = true;
 export const state = {
   currentUser: {},
   token: "",
+  expiresIn: "",
 };
 
 export const mutations = {
@@ -15,21 +16,26 @@ export const mutations = {
   SET_JWT_TOKEN(state, token) {
     state.token = token;
   },
+  SET_EXPIRATION(state, expiresIn) {
+    state.expiresIn = expiresIn;
+  },
 };
 
 export const actions = {
   login({ commit }, user) {
-    AuthService.retrieveToken(user).then((response) => {
+    return AuthService.retrieveToken(user).then((response) => {
       commit("SET_JWT_TOKEN", response.access_token);
-      console.log(response.access_token);
+      commit("SET_EXPIRATION", response.expires_in);
 
-      AuthService.retrieveUserInfo().then((response) => {
+      return AuthService.retrieveUserInfo().then((response) => {
         console.log(response);
 
-        UserService.getAuthUser(response.sub).then((response) => {
+        return UserService.getAuthUser(response.sub).then((response) => {
           console.log(response);
 
           commit("SET_CURRENT_USER", response);
+
+          return response;
         });
       });
     });
@@ -44,7 +50,10 @@ export const actions = {
 };
 
 export const getters = {
-    getCurrentUserId: (state) => {
-        return state.currentUser.id;
-    },
+  getCurrentUserId: (state) => {
+    return state.currentUser.id;
+  },
+  isUserAuthenticated: (state) => {
+    return state.token !== "";
+  },
 };

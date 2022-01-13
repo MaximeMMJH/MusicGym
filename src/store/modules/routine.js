@@ -5,7 +5,7 @@ export const namespaced = true;
 export const state = {
   items: [],
   routine: {},
-  pageSize: 2,
+  pageSize: 4,
 };
 
 export const mutations = {

@@ -2,7 +2,7 @@
   <v-app>
     <router-view />
     <v-col class="mt-14"></v-col>
-    <NavigationBar />
+    <NavigationBar v-if="show()" />
   </v-app>
 </template>
 
@@ -15,6 +15,11 @@ export default {
   },
   components: {
     NavigationBar,
+  },
+  methods: {
+    show() {
+      return this.$store.getters["auth/isUserAuthenticated"];
+    },
   },
 };
 </script>
